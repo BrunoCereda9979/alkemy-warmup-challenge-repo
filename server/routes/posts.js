@@ -2,6 +2,31 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/database');
 const Post = require('../models/Post');
+const multer = require('multer');
+
+// multer configuration
+const storageStrategy = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename: function(req, file, cb) {
+        cb(null, new Date().toISOString().replace(/:|\./g,'') + ' - ' + file.originalname);
+    }
+});
+
+const fileFilter = (req, file, cb) => {
+    // accept a file if is an image
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/svg') {
+        cb(null, true);
+    }
+    else {
+        cb(null, false);
+    }
+}
+
+// multer object
+const upload = multer({dest: 'uploads/', storage: storageStrategy, fileFilter: fileFilter});
+
 
 // get all posts
 router.get('/', (req, res) => {
@@ -45,14 +70,16 @@ router.get('/:id', (req, res) => {
     })
 });
 
-// post a new post
-router.post('/', (req, res) => {
+// post a new blog post
+router.post('/', upload.single('postImage'), (req, res) => {
     let postTitle = req.body.postTitle;
     let postContent = req.body.postContent;
-    let postImage = req.body.postImage;
+    let postImage = req.file;
     let postCategory = req.body.postCategory;
 
-    Post.create({post_title: postTitle, post_content: postContent, post_image: postImage, post_category: postCategory})
+    //console.log(JSON.stringify(postImage));
+
+    Post.create({post_title: postTitle, post_content: postContent, post_image: postImage.path, post_category: postCategory})
     .then(post => {
         res.status(200).json({
             'message': 'New post created successfuly'
