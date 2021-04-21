@@ -91,4 +91,24 @@ router.patch('/:id', (req, res) => {
     })
 });
 
+// delete a post
+router.delete('/:id', (req, res) => {
+    const postId = req.params.id;
+
+    Post.destroy({ where: { post_id: postId } })
+    .then(destroyed => {
+        if (destroyed === 1) {
+            res.status(200).json({
+                'message': 'Post deleted successfuly'
+            })
+        }
+    })
+    .catch(err => {
+        res.status(500).json({
+            'message': 'Could not delete post',
+            'error': err.message
+        })
+    })
+});
+
 module.exports = router;
