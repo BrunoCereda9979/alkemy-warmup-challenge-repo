@@ -26,6 +26,7 @@ const postsRoute = require('./routes/posts');
 
 // route handling
 app.use('/api/v1/posts', postsRoute);
+app.use('/uploads', express.static('uploads'));
 
 app.listen(process.env.APP_PORT || 3001, () => {
     console.log(`Server listening on port ${process.env.APP_PORT}...`);
