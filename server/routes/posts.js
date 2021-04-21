@@ -45,4 +45,25 @@ router.get('/:id', (req, res) => {
     })
 });
 
+// post a new post
+router.post('/', (req, res) => {
+    let postTitle = req.body.postTitle;
+    let postContent = req.body.postContent;
+    let postImage = req.body.postImage;
+    let postCategory = req.body.postCategory;
+
+    Post.create({post_title: postTitle, post_content: postContent, post_image: postImage, post_category: postCategory})
+    .then(post => {
+        res.status(200).json({
+            'message': 'New post created successfuly'
+        })
+    })
+    .catch(err => {
+        res.status(500).json({
+            'message': 'Could not create post',
+            'error': err
+        })
+    })
+});
+
 module.exports = router;

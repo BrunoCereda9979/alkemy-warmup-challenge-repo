@@ -1,12 +1,13 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, UUIDV4 } = require('sequelize');
 const sequelize = require('../db/database');
 
 // post model
 const Post = sequelize.define('post', {
     post_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: UUIDV4,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
     },
     post_title: {
         type: DataTypes.STRING,

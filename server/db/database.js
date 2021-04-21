@@ -7,5 +7,5 @@ module.exports = db = new Sequelize({
     password: '',
     database: 'blog-app-db',
     dialect: 'mysql',
-    logging: msg => console.log(`-> New DB query: ${msg}`)
+    logging: msg => console.log(`-> New DB message: ${msg}`)
 });
