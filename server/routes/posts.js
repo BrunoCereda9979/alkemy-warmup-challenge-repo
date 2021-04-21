@@ -66,4 +66,29 @@ router.post('/', (req, res) => {
     })
 });
 
+// edit a post
+router.patch('/:id', (req, res) => {
+    let postTitle = req.body.postTitle;
+    let postContent = req.body.postContent;
+    let postImage = req.body.postImage;
+    let postCategory = req.body.postCategory;
+
+    Post.update({post_title: postTitle, 
+        post_content: postContent, 
+        post_image: postImage, 
+        post_category: postCategory
+    }, { where: { post_id: req.params.id } })
+    .then(rowsUpdated => {
+        res.status(200).json({
+            'message': 'Post updated successfuly'
+        })
+    })
+    .catch(err => {
+        res.status(500).json({
+            'message': 'Could not edit the post',
+            'error': err.message
+        })
+    })
+});
+
 module.exports = router;
