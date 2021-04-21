@@ -3,21 +3,25 @@ const sequelize = require('../db/database');
 
 // post model
 const Post = sequelize.define('post', {
-    postTitle: {
+    post_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
+    },
+    post_title: {
         type: DataTypes.STRING,
     },
-    postContent: {
+    post_content: {
         type: DataTypes.STRING,
     },
-    postImage: {
+    post_image: {
         type: DataTypes.STRING,
     },
-    postCategory: {
+    post_category: {
         type: DataTypes.STRING,
     },
-    postCreationDate: {
-        type: DataTypes.STRING,
-    }
+}, {
+    tableName: 'posts'
 });
 
 module.exports = Post;

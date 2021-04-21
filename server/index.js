@@ -16,14 +16,16 @@ const db = require('./db/database');
 
 // test database connection
 db.authenticate()
-.then(() => console.log('Connected to database...'))
+.then(() => {
+    console.log('Connected to database...')
+})
 .catch(err => console.log('Cant connect to database', err))
 
 // routes
 const postsRoute = require('./routes/posts');
 
 // route handling
-app.use('/api/posts', postsRoute);
+app.use('/api/v1/posts', postsRoute);
 
 app.listen(process.env.APP_PORT || 3001, () => {
     console.log(`Server listening on port ${process.env.APP_PORT}...`);
