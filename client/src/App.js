@@ -12,9 +12,9 @@ function App() {
 
   // on load get the posts from the api
   useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/posts')
+    axios.get('http://localhost:3000/api/v1/posts')
     .then((posts) => {
-      setPosts(posts.data);
+      setPosts(posts.data.posts);
     })
     .catch(err => console.log(err.message))
   }, []);
@@ -26,7 +26,7 @@ function App() {
         {
           posts.map((post) => {
             return(
-              <BlogPost key={post.id} title={post.title} body={post.body}/>
+              <BlogPost key={post.post_id} title={post.post_title} body={post.post_content}/>
             )
           })
         }
