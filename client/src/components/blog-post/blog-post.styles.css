@@ -6,3 +6,9 @@
     padding: 0 20px;
     box-shadow: 1px 1px 25px 1px rgba(0, 0, 0, 0.1);
 }
+
+.post h1 {
+    width: 600px;
+    font-size: 25px;
+    font-weight: 400;
+}
