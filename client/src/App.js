@@ -5,6 +5,7 @@ import axios from 'axios';
 // components
 import PostsList from "./components/posts-list/posts-list.component";
 import BlogPost from "./components/blog-post/blog-post.component";
+import Button from "./components/button/button.component";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <div className="App">
+      <Button text="Button 1" color="white" background="red" />
       <PostsList>
         {
           posts.map((post) => {
