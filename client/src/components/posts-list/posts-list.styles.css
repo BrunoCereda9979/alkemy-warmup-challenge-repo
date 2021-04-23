@@ -4,12 +4,3 @@
     justify-content: space-evenly;
     align-items: center;
 }
-
-.post {
-    background-color: #FAFAFA;
-    width: 800px;
-    text-align: left;
-    margin: 15px 0;
-    padding: 0 20px;
-    box-shadow: 1px 1px 25px 1px rgba(0, 0, 0, 0.1);
-}
